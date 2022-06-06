@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - App</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    </environment>
+    
+</head>
+<body style="min-height:100vh; width:100vw; overflow-x:hidden;">
+    <nav class="navbar navbar-inverse bg-dark text-white"
+    style="display:flex !important; flex-direction:row;">
+        <div class="container flex">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">RWA_javni_dio</a>
+            </div>
+            <div class="navbar-collapse collapse d-flex justify-content-between" >
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="App" asp-action="Contact">Contact</a></li>
+                    <li>
+                     
+                    </li>
+                    <li><a asp-area="" asp-controller="App" asp-action="Contact">Odjava</a></li>
+               
+                </ul>
+                 
+            </div>
+         <select id="dropdown">
+             <option>Hrv</option>
+             <option>Eng</option>
+         </select>
+</div>
+    </nav>
+
+    <div class="container body-content w-100" style="width:100vw; margin:0;padding:0; 
+min-height:90vh; position:relative;">
+
+     @RenderBody()
+     <footer  class="text-center text-lg-start bg-light text-muted position-absolute
+bottom-0 left-0 w-100" style="position:absolute; bottom:0; left:0; width:100vw;">
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2022 Copyright:
+    <a class="text-reset fw-bold">Algebra</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+    </div>
+    <script>
+        function setCookie(key, value) {
+        
+        document.cookie = key + '=' + value;
+    }
+
+    function getCookie(key) {
+        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return keyValue ? keyValue[2] : null;
+    }
+
+    function eraseCookie(key) {
+        var keyValue = getCookie(key);
+        setCookie(key, keyValue, '-1');
+    }
+
+    var lang = getCookie('lang');
+    var dropdown = document.getElementById('dropdown')
+    if(!lang){
+        setCookie('lang', 'hrv');
+    }
+    else {
+            dropdown.value=lang;
+    }
+
+    dropdown.addEventListener('change',e=>{
+        e.preventDefault();
+                setCookie('lang', e.target.value);
+        window.location.reload();
+    })
+    </script>
+</body>
+</html>
