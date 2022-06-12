@@ -7,10 +7,10 @@ namespace ZvonimirSkorin_rwa.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Login : ControllerBase
+    public class Login : Controller
     {
         // GET: api/<Login>
-        [HttpGet("/Login")]
+        [HttpGet("/Api/Login")]
         public bool Get()
         {
             string userName = Request.Query["username"][0];
@@ -24,6 +24,7 @@ namespace ZvonimirSkorin_rwa.Controllers
             }
             return false;
         }
+        
 
         
     }

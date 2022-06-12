@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RWA_javni_dio.Models;
+using ZvonimirSkorin_rwa.DAL;
 
 namespace RWA_javni_dio.Controllers
 {
@@ -12,8 +13,14 @@ namespace RWA_javni_dio.Controllers
     {
         public IActionResult Index()
         {
-
+            string token = Request.Cookies["Token"];
+            if(token != null)
+                if (AuthRepo.validateToken(token))
+                {
+                    return Redirect("App");
+                }
             return View();
+
         }
 
         public IActionResult About()

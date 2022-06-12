@@ -22,7 +22,8 @@ namespace ZvonimirSkorin_rwa.Middleware
             {
                 string path = context.Request.Path;
                 string [] parts = path.Split("/");
-                if (path != "/" && root!="api")
+                string root = parts[1];
+                if (path != "/" && root!="Api")
                 {
                     if (context.Request.Cookies["Token"] == null)
                     {

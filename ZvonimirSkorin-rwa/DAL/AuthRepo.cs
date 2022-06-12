@@ -29,6 +29,16 @@ namespace ZvonimirSkorin_rwa.DAL
             return tokenHandler.WriteToken(token);
         }
 
+        public static string getUsernameFromToken(string? token)
+        {
+            if (token == null) return "";
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(token);
+            var tokenS = jsonToken as JwtSecurityToken;
+            var jti = tokenS.Claims.First(claim => claim.Type == "unique_name").Value;
+            return jti;
+        }
+
         public static bool validateToken(string token)
         {
             if (token == null) return false;

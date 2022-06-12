@@ -1,8 +1,93 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 <div style="color:black !important;">
-    bok
+
+    <div class="container p-4">
+            <div class="form-group">
+                <fieldset class="p-4">
+
+                    <legend>List of Apartments</legend>
+                    <div style="display:flex; justify-content:flex-end;">
+                    <div style="display:flex; gap:10px;">
+                        <input type="number" id="Rooms" type="text" placeholder="Rooms"/>
+                        <input type="number" id="Adults"  type="text" placeholder="Adults"/>
+                        <input type="number" id="Children"  type="text" placeholder="Children"/>
+                        <select id="select">
+                            <option value="">Nema</option>
+                            <option value="order by a.price desc">ID uzlazno</option>
+                            <option value="order by a.price asc">ID silazno</option>
+                        </select>
+                        <button id="btnFilter">Filter</button>
+
+                    </div>
+                    </div>
+
+    <div style="margin-top:30px; padding:1rem; box-sizing:border-box;
+justify-items:center; align-content:center; gap:1rem;
+display:grid; grid-template-columns:1fr 1fr 1fr;">
+                @foreach (var row in Model){
+                    <section style="height:550px; border-radius:1rem; box-shadow:0px 0px 5px black; 
+overflow:hidden; display:flex; align-items:center; flex-direction:column;
+">
+                        <img style="width:100%; height:auto; max-height:300px;  object-fit:cover;" 
+                        src="https://picsum.photos/id/1/400/400"/>
+                      
+       <h2 style="margin:1rem auto; ">@row.Name</h2>
+                                <div><strong>@row.City</strong> @row.Address</div>
+                                <div>
+                                    <strong>Max Adults</strong>
+                                    @row.MaxAdults</div>
+                                <div>
+                                <strong>Max Children</strong>
+                                    @row.MaxChildren</div>
+                                <div>
+                                <strong>Total Rooms</strong>
+
+                                    @row.TotalRooms</div>
+                                <div>
+                                    <strong>Beach distance</strong>
+                                    @row.BeachDistance</div>
+                                <div>
+                                    <strong>Price</strong>
+                                    @row.Price</div>
+                                <div><a href="/App/Apartman?Id=@row.Id">Otvori</a></div>
+   </section>
+           }
+
+           
+
+  
 </div>
+</div>
+<script>
+    function getCookie(key) {
+        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return keyValue ? keyValue[2] : null;
+    }
+    const Rooms = document.getElementById("Rooms");
+    const Adults = document.getElementById("Adults");
+    const Children = document.getElementById("Children");
+        var r = getCookie('Rooms');
+    var c = getCookie('Children');
+    var a = getCookie('Adults');
+
+    Rooms.value = r;
+    Children.value = c;
+    Adults.value = a;
+document.getElementById("btnFilter").addEventListener('click',()=>{
+    setCookie('Rooms', Rooms.value)
+    setCookie('Adults', Adults.value)
+    setCookie('Children', Children.value)
+            window.location.reload();
+})
+
+    document.getElementById("select").addEventListener('click',(e)=>{
+        setCookie('Sort',e.target.value);
+    })
+
+</script>
+
+<style>
+strong{
+    width:250px;
+}
+</style>
